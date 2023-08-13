@@ -28,3 +28,20 @@
       src: spotifyd.conf.j2
       dest: ~/.config/spotifyd/spotify.conf
 
+- name: Set up spotifyd as systemd service
+  hosts: local
+  tasks:
+
+  - name: Create systemd service file
+    copy:
+      src: spotifyd.service
+      dest: /etc/systemd/user/spotifyd.service
+    become: true
+
+  - name: Start spotifyd daemon
+    systemd:
+      name: spotifyd
+      daemon_reload: true
+      state: started
+      enabled: true
+      scope: user
