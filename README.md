@@ -32,6 +32,14 @@ _Note that to use Spotifyd, you'll need a premium Spotify account!_
 
 ### Usernames and passwords
 
+_Note that, at the time of writing, in the latest release of Spotifyd (v0.3.5),
+support for ["zerconf"
+authentication](https://github.com/librespot-org/librespot/blob/master/docs/authentication.md#zeroconf-based-authentication)
+has been added, which means it is possible to use Spotifyd without specifying
+your username or password at all! However, here I still use the `username` and
+`password` config options, as this approach will still work with earlier
+release of Spotifyd._
+
 Spotifyd will need to authenticate against your Spotify account to work. As
 such, you'll need to provide Spotifyd your username and password. In this
 project, I've used [Ansible
