@@ -31,11 +31,11 @@
       remote_src: true
     become: true
 
-- name: Configure spotifyd
+- name: Configure Spotifyd
   hosts: local
   tasks:
 
-  - name: Ensure spotifyd config folder exists
+  - name: Ensure Spotifyd config folder exists
     file:
       path: ~/.config/spotifyd
       state: directory
@@ -45,7 +45,7 @@
       src: spotifyd.conf.j2
       dest: ~/.config/spotifyd/spotify.conf
 
-- name: Set up spotifyd as systemd service
+- name: Set up Spotifyd as systemd service
   hosts: local
   tasks:
 
@@ -55,7 +55,7 @@
       dest: /etc/systemd/user/spotifyd.service
     become: true
 
-  - name: Start spotifyd daemon
+  - name: Start Spotifyd daemon
     systemd:
       name: spotifyd
       daemon_reload: true
