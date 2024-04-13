@@ -3,3 +3,6 @@ localhost
 
 [local:vars]
 ansible_connection=local
+# The version of spotifyd to install should either be "latest"
+# or a valid release tag, eg. "v0.3.4"
+spotifyd_version=latest

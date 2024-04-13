@@ -1,15 +1,32 @@
-- name: Download and install spotifyd
+- name: Download and install Spotifyd
   hosts: local
   tasks:
 
-  - name: Get the latest release version of spotifyd
-    uri:
-      url: https://api.github.com/repos/Spotifyd/spotifyd/releases/latest
-    register: latest_release
+  - name: Get version tag of latest available Spotifyd release
+    block:
 
-  - name: Download the latest ARMv6 binary to /usr/bin/
+      - name: Poll GitHub for latest Spotifyd release
+        uri:
+          url: https://api.github.com/repos/Spotifyd/spotifyd/releases/latest
+        register: latest_spotifyd_release
+
+      - name: Display latest release of Spotifyd discovered
+        debug:
+          msg: "Found latest release of Spotifyd as: {{ latest_spotifyd_release.json.tag_name }}"
+
+      - name: Set latest version of Spotifyd discovered as version to install
+        set_fact:
+          spotifyd_version: "{{ latest_spotifyd_release.json.tag_name }}"
+
+    when: spotifyd_version == "latest"
+
+  - name: Show Spotifyd version to install
+    debug:
+      msg: "Installing Spotifyd version: {{ spotifyd_version }}"
+
+  - name: Download the desired Spotifyd ARMv6 binary to /usr/bin/
     unarchive:
-      src: "https://github.com/Spotifyd/spotifyd/releases/download/{{ latest_release.json.tag_name }}/spotifyd-linux-armv6-slim.tar.gz"
+      src: "https://github.com/Spotifyd/spotifyd/releases/download/{{ spotifyd_version }}/spotifyd-linux-armv6-slim.tar.gz"
       dest: /usr/bin
       remote_src: true
     become: true
@@ -19,7 +36,7 @@
   tasks:
 
   - name: Ensure spotifyd config folder exists
-    file: 
+    file:
       path: ~/.config/spotifyd
       state: directory
 
