@@ -11,9 +11,9 @@ my phone (and other devices on my home network), and have it play through my
 amplifier](https://www.marantz.com/en-us/product/hi-fi-components/m-cr603).
 
 Although many, if not most modern amplifiers, have built-in streaming
-functionality, the M-CR603 doesn't! Despite this, the M-CR603 is
-still a very capable and performant amplifier. Fortunately, the combination of
-Spotifyd and a Raspberry Pi means I can bring streaming to my existing setup.
+functionality, the M-CR603 doesn't! Despite this, it is still a very capable
+and performant amplifier. Fortunately, the combination of Spotifyd and a
+Raspberry Pi means I can bring streaming to this outdated hardware.
 
 ## Audio output
 
